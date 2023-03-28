@@ -16,7 +16,7 @@ function _addDiscount2 (each,discount) {
 async function _reduceStock (req) {
   const { Items: orderItems } = req.data
 
-  return cds.transaction(req) .run (()=> orderItems.map (item =>
+  return cds.transaction(req) .run (orderItems.map (item =>
     UPDATE (Books)
       .set ('stock -=', item.amount)
       .where ('ID =', item.book_ID) .and ('stock >=', item.amount)
